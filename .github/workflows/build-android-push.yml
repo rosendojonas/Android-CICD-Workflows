@@ -15,7 +15,9 @@ jobs:
           distribution: zulu
         
       - name: Gradle Assemble Debug
-        run: ./gradlew assembleDebug
+        run: |
+          git update-index --chmod=+x gradlew
+          ./gradlew assembleDebug
       
         
   
