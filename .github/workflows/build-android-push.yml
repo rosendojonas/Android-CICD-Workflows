@@ -1,0 +1,14 @@
+name: Build Android Push
+on: [push]
+jobs:
+  build-debug-apk:
+    name: Assemble
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Gradle Assemble Debug
+        run: ./gradlew assembleDebug
+      
+        
+  
