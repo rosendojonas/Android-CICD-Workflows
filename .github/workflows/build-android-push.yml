@@ -12,6 +12,7 @@ jobs:
         uses: actions/setup-java@v3.13.0
         with:
           java-version: 1.8
+          distribution: jdk
         
       - name: Gradle Assemble Debug
         run: ./gradlew assembleDebug
