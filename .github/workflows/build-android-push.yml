@@ -17,5 +17,6 @@ jobs:
       - name: Assemble Debug
         run: |
           ls -a
+          chmod +x gradlew
           ./gradlew assembleDebug
       
