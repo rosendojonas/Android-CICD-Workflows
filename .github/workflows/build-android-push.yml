@@ -11,8 +11,8 @@ jobs:
       - name: Install JDK
         uses: actions/setup-java@v3.13.0
         with:
-          java-version: 8.0.382+5
-          distribution: zulu
+          distribution: temurin
+          java-version: 11
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.9.0
@@ -21,7 +21,5 @@ jobs:
           
       - name: Assemble Debug
         run: |
-          ls -a
-          chmod +x gradlew
           ./gradlew assembleDebug
       
