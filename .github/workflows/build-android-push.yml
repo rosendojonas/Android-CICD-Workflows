@@ -1,26 +1,21 @@
 name: Build Android Push
 on: [push]
 jobs:
-  checkout-branch:
+  build-debug:
     name: Checkout Branch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-  install-jdk:
-      needs: [checkout-branch]
-      runs-on: ubuntu-latest
-      steps:
-        - name: Install JDK
-          uses: actions/setup-java@v3.13.0
-          with:
-            java-version: 8.0.382+5
-            distribution: zulu
-  assemble-debug:
-    needs: [install-jdk]
-    runs-on: ubuntu-latest
-    steps:
+
+      - name: Install JDK
+        uses: actions/setup-java@v3.13.0
+        with:
+          java-version: 8.0.382+5
+          distribution: zulu
+          
       - name: Assemble Debug
         run: |
           ls -a
           ./gradlew assembleDebug
+      
