@@ -21,5 +21,6 @@ jobs:
           
       - name: Assemble Debug
         run: |
+          chmod +x gradlew
           ./gradlew assembleDebug
       
