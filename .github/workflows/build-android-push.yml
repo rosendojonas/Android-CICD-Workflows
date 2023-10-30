@@ -33,4 +33,3 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug
-      
