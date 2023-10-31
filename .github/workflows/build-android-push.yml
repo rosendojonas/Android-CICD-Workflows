@@ -18,17 +18,17 @@ jobs:
         uses: gradle/gradle-build-action@v2.9.0
         with:
           gradle-version: 8.1.1
-          
-      - name: Assemble Debug
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
 
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest
 
       - name: Run Debug Lint
         run: ./gradlew lintDebug
+
+      - name: Assemble Debug
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
