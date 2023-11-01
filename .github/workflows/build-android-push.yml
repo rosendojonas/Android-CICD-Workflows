@@ -1,5 +1,9 @@
 name: Build Android Push
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, develop]
 jobs:
   android_ui_test:
     runs-on: macos-latest
@@ -58,6 +62,15 @@ jobs:
       - name: Allow Gradle Commands
         run: |
           chmod +x gradlew
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest
