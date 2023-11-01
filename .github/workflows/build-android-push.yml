@@ -1,9 +1,30 @@
 name: Build Android Push
 on: [push]
 jobs:
+  android_ui_test:
+    runs-on: macos-latest
+    name: Android UI Test
+    steps:
+      - name: Checkout For UI Test
+        uses: actions/checkout@v4.1.1
+
+      - name: Run Android Tests
+        uses: ReactiveCircus/android-emulator-runner@v2.28.0
+        with:
+          api-level: 31
+          script: ./gradlew connectedDebugAndroidTest
+
+      - name: Upload Test Reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: android-test-reports
+          path: '**/build/reports/androidTests/'
+          
   build-debug:
     name: Checkout Branch
     runs-on: ubuntu-latest
+    needs: [android_ui_test]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -25,7 +46,7 @@ jobs:
 
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest
-
+        
       - name: Run Debug Lint
         run: ./gradlew lintDebug
 
@@ -38,3 +59,5 @@ jobs:
         with:
           name: app-debug
           path: app/build/outputs/apk/debug/app-debug.apk
+  
+  
