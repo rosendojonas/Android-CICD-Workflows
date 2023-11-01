@@ -14,7 +14,9 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86_64
-          script: ./gradlew connectedDebugAndroidTest
+          script: |
+            chmod +x gradlew
+            ./gradlew connectedDebugAndroidTest
 
       - name: Upload Test Reports
         if: ${{ always() }}
